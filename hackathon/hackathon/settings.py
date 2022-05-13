@@ -11,16 +11,24 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Set repository directory
+REPOSITORY_DIR = Path(__file__).resolve().parent.parent.parent
+
+# Import credentials module contains secret data
+from importlib.machinery import SourceFileLoader
+secret_credentials = SourceFileLoader('module.secret_credentials', f'{REPOSITORY_DIR}/secret_credentials.py').load_module()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mlir$j3=fjbzfkc6co71z_8h#9dvi5bx=9)*gfnc7+bk*-uo!h'
+SECRET_KEY = secret_credentials.DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -50,6 +58,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -83,8 +92,12 @@ WSGI_APPLICATION = 'hackathon.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': secret_credentials.DB['NAME'],
+        'USER': secret_credentials.DB['USER'],
+        'PASSWORD': secret_credentials.DB['PASSWORD'],
+        'HOST': secret_credentials.DB['HOST'],
+        'PORT': secret_credentials.DB['PORT'],
     }
 }
 
