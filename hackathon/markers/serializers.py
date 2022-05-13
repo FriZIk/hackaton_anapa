@@ -39,8 +39,6 @@ class MarkerSerializer(serializers.ModelSerializer):
       'created_on',
     )
   def create(self, validated_data):
-    name = 'None'
-    description = ''
     image = validated_data.pop('image')
     gps = validated_data.pop('gps')
     marker_type = validated_data.pop('marker_type')
@@ -54,17 +52,6 @@ class MarkerSerializer(serializers.ModelSerializer):
     else:
       error = { 'message': 'Validation error. Your data: {} is invalid.'.format(gps) }
       raise serializers.ValidationError(error)
-    
-    if marker_type == 1: # if ambros
-      try:
-        val_res = validate_single(image.image)
-        if val_res:
-          pass
-        else:
-          error = { 'message': 'Validation error. Image is not ambrosia. Denied' }
-          raise serializers.ValidationError(error)
-      except Exception as e:
-        print(e) 
 
     try:
       address = validated_data.pop('address')
