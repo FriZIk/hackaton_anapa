@@ -161,7 +161,7 @@ REST_FRAMEWORK = {
     }
 }
 
-MEDIA_ROOT = '/var/www/html/'
+MEDIA_ROOT = '/home/h1w/Dev/hackathon/media/'
 MEDIA_URL = '/media/'
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
