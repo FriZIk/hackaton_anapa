@@ -13,3 +13,21 @@
 | **POST** | /api/v1/auth/jwt/refresh/ | Обновить JWT токен |
 | **GET** | /api/v1/map/markers/ | Получить список всех маркеров |
 | **POST** | /api/v1/map/markers/upload/ | Загрузить новый маркер |
+
+
+## Map. Upload marker
+### **POST** "/map/markers/upload/" _form-data_
+## Marker
+| Name | Type | Required | Description |
+| ----- | ----- | ----- | ----- |
+| image | string | **Yes** | Фотография объекта |
+| marker_type | int | **Yes** | Тип оъекта: 1) Повреждения дороги. 2) Повреждения знака. 3) Проблемы с разметкой |
+| gps | string | **Yes** | Ширина и долгота, разделенные запятой |
+| address | string | No | Местонахождение по GPS |
+
+
+## Map. Get all markers
+### **GET** /map/markers/
+| Name | Type | Required | Description |
+| ----- | ----- | ----- | ----- |
+| List | list<Marker> | **Yes** | Список всех меток |
