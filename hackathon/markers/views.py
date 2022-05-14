@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from .models import Marker
-from .serializers import MarkerSerializer
+from .serializers import MarkerSerializer, MarkersArchiveSerializer
 
 from django.shortcuts import get_object_or_404
 import base64
@@ -30,6 +30,14 @@ class MarkerDetail(APIView):
 class MarkerUpload(APIView):
   def post(self, request, format=None):
     serializer = MarkerSerializer(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class MarkerUploadArchive(APIView):
+  def post(self, request, format=None):
+    serializer = MarkersArchiveSerializer(data=request.data)
     if serializer.is_valid():
       serializer.save()
       return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
