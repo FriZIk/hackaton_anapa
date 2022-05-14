@@ -30,3 +30,9 @@ client_jwt.upload_markers_by_archive("/path/to/archive.zip")
 
 - Удачное выполнение, код 202_ACCEPTED
 
+Как должен выглядеть архив?
+- папка архива
+-- Папка photos (внтури файлики фоток)
+-- Папка metadatas (внутри json'ы с инфо о метках)
+
+Пример, как должен выглядеть архив _utils/archive_example.zip_
