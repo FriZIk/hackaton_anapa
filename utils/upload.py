@@ -3,9 +3,8 @@ import config
 import base64
 
 class ClientJWT:
-  def __init__(self, base_url, req_url, username, password):
+  def __init__(self, base_url, username, password):
     self.base_url = base_url
-    self.req_url = req_url
     self._username = username
     self._password = password
     self._session = requests.Session()
@@ -35,10 +34,23 @@ class ClientJWT:
       "address": address,
     }
 
-    response = self._session.post(self.base_url + self.req_url, headers=self._headers, json=payload)
+    response = self._session.post(self.base_url + "/map/markers/upload/", headers=self._headers, json=payload)
     response.raise_for_status()
 
-    print(response.json())
+    print(response.status_code)
 
-client_jwt = ClientJWT(config.base_url, config.req_url, config.credentials['username'], config.credentials['password'])
-client_jwt.upload_marker("/home/h1w/Dev/hackathon/hackaton_anapa/utils/photo_2020-10-14_02-10-32.jpg", 1, "45.434, 38.678", "pizda")
+  def upload_markers_by_archive(self, archive_path):
+    self.auth_jwt_create()
+
+    files = {
+      'file': open(archive_path, 'rb')
+    }
+
+    response = self._session.post(self.base_url + "/map/markers/upload/as_archive/", headers=self._headers, files=files)
+    response.raise_for_status()
+
+    print(response.status_code)
+
+client_jwt = ClientJWT(config.base_url, config.credentials['username'], config.credentials['password'])
+client_jwt.upload_marker("/home/h1w/Dev/hackathon/hackaton_anapa/utils/IMG_20210222_152504.png", 1, "45.434, 38.678", "gggjgjgjgj")
+# client_jwt.upload_markers_by_archive("/home/h1w/Dev/hackathon/hackaton_anapa/utils/archive_example.zip")
