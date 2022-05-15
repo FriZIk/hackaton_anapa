@@ -14,7 +14,7 @@
         <b-nav-item class="my-nav-item" :to="{name: 'map'}" exact>Карта</b-nav-item>
         <b-nav-item class="my-nav-item" :to="{name: 'gallery'}">Галерея</b-nav-item>
         <b-nav-item class="my-nav-item" :to="{name: 'archive'}">Архив</b-nav-item>
-        <!-- <b-nav-item class="my-nav-item" :to="{name: 'about'}">О Нас</b-nav-item> -->
+        <b-nav-item class="my-nav-item" :to="{name: 'about'}">О Нас</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

@@ -10,7 +10,7 @@
           </b-card>
         </b-card-group> -->
     
-    <h1 class="text-center">Архив меток</h1>
+    <h1 class="text-center" style="margin-bottom: 0.3em;">Архив меток</h1>
     <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0">
     <b-row class="row-cols-1 row-cols-md-2" style="width: 80%">
       <b-col class="col-mb-6 " v-for="marker in markers">
