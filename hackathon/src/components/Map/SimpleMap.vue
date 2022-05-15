@@ -9,30 +9,28 @@
     @update:zoom="zoomUpdate"
     >
         <l-tile-layer :url="url" :attribution="attribution" />
-        <l-marker v-for="(marker, index) in markers" :key="index" ref="myMarker" :lat-lng="marker.latLng">
+        <l-marker @click='$emit("clickonmarker", marker)' v-for="(marker, index) in markers" :key="index" ref="myMarker" :lat-lng="marker.latLng">
             <l-icon
-            v-if="marker.marker_type == 0"
+            v-if="marker.marker_type === 0"
             :icon-size="staticIconSize"
             :icon-anchor="staticAnchor"
-            icon-url="https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-File.png"
+            icon-url="https://i.imgur.com/sHfnquh.png"
+            >
+            </l-icon>
+            <l-icon
+            v-else-if="marker.marker_type === 1"
+            :icon-size="staticIconSize"
+            :icon-anchor="staticAnchor"
+            icon-url="https://i.imgur.com/pXwZTrF.png"
             >
             </l-icon>
             <l-icon
             v-else
             :icon-size="staticIconSize"
             :icon-anchor="staticAnchor"
-            icon-url="https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-Image.png"
+            icon-url="https://i.imgur.com/VuZ6mwp.png"
             >
             </l-icon>
-            <l-popup>
-                <div @click="innerClick">
-                    <!-- <img src="{{ marker.thumbnail }}" alt="..." /> -->
-                    {{ marker.name }}
-                    <p v-show="showParagraph">
-                        {{ marker.description }}
-                    </p>
-                </div>
-            </l-popup>
         </l-marker>
     <l-control-zoom position="bottomright"  ></l-control-zoom>
     </l-map>
@@ -62,7 +60,7 @@ export default {
             },
             showMap: true,
             staticAnchor: [16, 37],
-            staticIconSize: [32, 37],
+            staticIconSize: [32, 50],
             errors: []
         };
     },
@@ -102,6 +100,9 @@ export default {
         innerClick() {
             alert("Click!")
         },
+        aboba() {
+            console.log('aboba clicked');
+        }
     },
     computed: {
         dynamicSize() {
