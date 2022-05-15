@@ -36,6 +36,12 @@
 </template>
 
 <style scoped>
+@media screen and (max-width: 600px) {
+  .archive-card img {
+    display: none !important;
+  }
+}
+
 #card-text {
   font-family: 'Inter';
   font-style: normal;
@@ -44,6 +50,13 @@
   line-height: 24px;
   margin-left: 2em;
   margin-top: 1em;
+  word-wrap: break-word;
+  overflow-wrap: anywhere
+}
+
+.archive-card {
+  margin-bottom: 1.5em;
+  max-width:100%;
 }
 
 #card-address {
@@ -52,10 +65,6 @@
   font-weight: 700;
   font-size: 21px;
   line-height: 30px;
-}
-
-.archive-card {
-  margin-bottom: 1.5em;
 }
 
 .archive-card img {

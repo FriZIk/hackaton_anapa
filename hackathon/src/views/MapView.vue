@@ -1,7 +1,7 @@
 <template>
   <div class="map container-fluid">
-    <b-row class="justify-content-center" style="margin-left: 1%; margin-right: 1%; margin-top: 2%; margin-bottom: 1%;">
-      <b-col class="col-xs-6 col-md-4">
+    <b-row style="margin-left: 1%; margin-right: 1%; margin-top: 2%; margin-bottom: 1%;">
+      <b-col class="col-lg-4 col-md-4 col-sm-3 col-xs-3" id="card-col">
         <b-card
           no-body
           img-src=""
@@ -19,15 +19,13 @@
           </b-card-body>
         </b-card>
       </b-col>
-      <b-col class="col-xs-12 col-sm-6 col-md-8">
+      <b-col class="col-lg-8 col-md-8 col-sm-7 col-xs-9" style="min-height: 80vh;">
         <b-container id="simple-map" style="width: 100%; height: 100%;">
           <SimpleMap @clickonmarker="clickOnMarker" />
         </b-container>
       </b-col>
     </b-row>
     <b-row>
-      <!-- <p id="footer-text-1">Сделано командой CRAFSED</p>
-      <p id="footer-text-2">test</p>  -->
       <div class="col-12"><span id="footer-text-1" class="float-left">Сделано командой CRAFSED</span> <span id="footer-text-2" class="float-right">Copyright &copy; {{ current_year }}, городские дороги</span></div>
     </b-row>
 
@@ -171,6 +169,11 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 1024px) {
+  #card-col {
+    display: none !important;
+  }
+}
 
 #button-delete-marker {
   background-color: #05FF00;

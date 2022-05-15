@@ -1,5 +1,5 @@
 <template>
-  <b-navbar variant="faded" id="b-navbar-my">
+  <b-navbar toggleable="lg" variant="faded" id="b-navbar-my">
     <b-navbar-brand>
       <b-row>
         <!-- <img id="navbar-brand-img" src="https://placekitten.com/g/30/30" height="50.39158630371094px" width="55.094974517822266px" class="d-inline-block align-top" alt="Kitten" :to="{name: 'map'}"> -->
