@@ -34,6 +34,7 @@
                 </div>
             </l-popup>
         </l-marker>
+    <l-control-zoom position="bottomright"  ></l-control-zoom>
     </l-map>
 </template>
 
@@ -57,6 +58,7 @@ export default {
             mapOptions: {
                 zoomSnap: 0.5,
                 attributionControl: false,
+                zoomControl: false,
             },
             showMap: true,
             staticAnchor: [16, 37],
@@ -64,27 +66,29 @@ export default {
             errors: []
         };
     },
-    // created() {
-    //     axios.get('api/v1/map/markers')
-    //         .then(response => {
-    //             console.log(response.data)
-    //             for (var marker_info of response.data) {
-    //                 var coords = marker_info.gps.split(',')
-    //                 this.markers.push(
-    //                     {
-    //                         'marker_type': marker_info.marker_type,
-    //                         'latLng': latLng(coords[0], coords[1]),
-    //                         'image': marker_info.image,
-    //                     }
-    //                 )
-    //             }
-    //             console.log(this.markers)
-    //         })
-    //         .catch(e => {
-    //             this.errors.push(e)
-    //             console.log(e)
-    //         })
-    // },
+    created() {
+        axios.get('api/v1/map/markers')
+            .then(response => {
+                console.log(response.data)
+                for (var marker_info of response.data) {
+                    var coords = marker_info.gps.split(',')
+                    this.markers.push(
+                        {
+                            'marker_type': marker_info.marker_type,
+                            'created_on': marker_info.created_on,
+                            'address': marker_info.address,
+                            'latLng': latLng(coords[0], coords[1]),
+                            'image': marker_info.image,
+                        }
+                    )
+                }
+                console.log(this.markers)
+            })
+            .catch(e => {
+                this.errors.push(e)
+                console.log(e)
+            })
+    },
     methods: {
         zoomUpdate(zoom) {
             this.currentZoom = zoom;

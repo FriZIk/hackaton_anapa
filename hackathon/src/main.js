@@ -13,7 +13,7 @@ import '@/assets/app.scss'
 Vue.config.productionTip = false
 
 import { Icon } from 'leaflet'
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon, LControlZoom } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 Vue.component('l-map', LMap);
@@ -22,6 +22,7 @@ Vue.component('l-marker', LMarker);
 Vue.component('l-popup', LPopup)
 Vue.component('l-tooltip', LTooltip)
 Vue.component('l-icon', LIcon)
+Vue.component('l-control-zoom', LControlZoom)
 
 delete Icon.Default.prototype._getIconUrl
 Icon.Default.mergeOptions({
@@ -32,7 +33,11 @@ Icon.Default.mergeOptions({
 
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://10.100.0.100:8001/';
+axios.defaults.baseURL = 'http://api.gordorogi.tk/';
+
+import lightbox from 'vlightbox'
+
+Vue.use(lightbox)
 
 new Vue({
   router,
